@@ -22,6 +22,7 @@ module.exports = function(grunt) {
         boss: true,
         eqnull: true,
         browser: true,
+        maxparams: 3,
         globals: {
           YUI: true,
           YUI_config: true
