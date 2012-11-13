@@ -6,11 +6,16 @@
     }
 
     //But this should...
-    function takesRidiculouslyManyArgs(a, b, c, d, e, f) {
+    function takesArray(array) {
+        var sum = 0,
+            i = 0;
+        for (; i < array.length; i++) {
+            sum += array[i];
+        }
         ops++;
-        return a + b + c + d +e +f;
+        return sum;
     }
 
-    return takesRidiculouslyManyArgs(1, 2, 3, 4, 5, 6);
+    return takesArray([1, 2, 3, 4, 5, 6]);
 
 }());
