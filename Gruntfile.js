@@ -34,13 +34,28 @@ module.exports = function(grunt) {
       sources: {
         src: 'app/assets/javascript/**/*.js'
       }
+    },
+    watch: {
+      gruntfile: {
+        files: '<%= jshint.gruntfile.src %>',
+        tasks: ['jshint:gruntfile']
+      },
+      sources: {
+        files: '<%= jshint.sources.src %>',
+        tasks: ['jshint:sources']
+      },
+      options: {
+        forceWatchMethod: 'old'
+      }
     }
   });
 
   //Load tasks
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
-  // Default task.
+
+    // Default task.
   grunt.registerTask('default', ['jshint']);
 
 };

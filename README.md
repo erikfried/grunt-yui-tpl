@@ -24,3 +24,13 @@ There are two ways of installing modules with npm: globally and locally.
 ## Installation of the projects dependencies
 
 * `npm install`
+
+## Linting
+`grunt jshint` or just `grunt` since it is the default.
+
+## Watching
+`grunt watch:sources`
+Note that it is broken on Node 0.8.14 on os x 10.8.2
+
+
+
