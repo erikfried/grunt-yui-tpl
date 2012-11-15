@@ -1,8 +1,9 @@
 /*global module:false*/
 module.exports = function(grunt) {
 
-  // Project configuration.
-  grunt.initConfig({
+    var JS_SOURCES = 'app/assets/javascript/src/**/*.js';
+
+    grunt.initConfig({
     // Metadata, not needed but useful for future refence
     pkg: grunt.file.readJSON('package.json'),
     gruntfile: {
@@ -32,7 +33,7 @@ module.exports = function(grunt) {
         src: 'Gruntfile.js'
       },
       sources: {
-        src: 'app/assets/javascript/**/*.js'
+        src: JS_SOURCES
       }
     },
     watch: {
@@ -47,12 +48,25 @@ module.exports = function(grunt) {
       options: {
         forceWatchMethod: 'old'
       }
+    },
+    jasmine : {
+      customTemplate : {
+          src : JS_SOURCES,
+          options : {
+              vendor   : 'app/assets/javascript/vendor/**/*.js',
+              specs    : 'test/javascript/specs/**/*spec.js',
+              template : 'test/javascript/YuiJasmineRunner.tmpl'
+          }
+      }
     }
   });
+
+  // Project configuration.
 
   //Load tasks
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
 
 
     // Default task.
