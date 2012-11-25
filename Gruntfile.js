@@ -1,9 +1,9 @@
 /*global module:false*/
 module.exports = function(grunt) {
 
-    var JS_SOURCES = 'app/assets/javascript/src/**/*.js';
+  var JS_SOURCES = 'app/assets/javascript/src/**/*.js';
 
-    grunt.initConfig({
+  grunt.initConfig({
     // Metadata, not needed but useful for future refence
     pkg: grunt.file.readJSON('package.json'),
     gruntfile: {
@@ -36,27 +36,30 @@ module.exports = function(grunt) {
         src: JS_SOURCES
       }
     },
+    jasmine : {
+      src : JS_SOURCES,
+      options : {
+        vendor   : 'app/assets/javascript/vendor/**/*.js',
+        specs    : 'test/javascript/specs/**/*spec.js',
+        template : 'test/javascript/YuiJasmineRunner.tmpl'
+      }
+    },
     watch: {
       gruntfile: {
         files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
+        tasks: ['jshint:gruntfile'],
+        options: {
+          forceWatchMethod: 'old',
+          interrupt: true
+        }
       },
       sources: {
         files: '<%= jshint.sources.src %>',
-        tasks: ['jshint:sources']
-      },
-      options: {
-        forceWatchMethod: 'old'
-      }
-    },
-    jasmine : {
-      customTemplate : {
-          src : JS_SOURCES,
-          options : {
-              vendor   : 'app/assets/javascript/vendor/**/*.js',
-              specs    : 'test/javascript/specs/**/*spec.js',
-              template : 'test/javascript/YuiJasmineRunner.tmpl'
-          }
+        tasks: ['jshint:sources'],
+        options: {
+          forceWatchMethod: 'old',
+          interrupt: true
+        }
       }
     }
   });
