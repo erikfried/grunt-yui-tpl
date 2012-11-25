@@ -2,8 +2,9 @@
 module.exports = function(grunt) {
 
   var JS_SOURCES = 'app/assets/javascript/src/**/*.js';
+  var STYLESHEETS_PATH = "app/assets/stylesheets";
 
-  grunt.initConfig({
+    grunt.initConfig({
     // Metadata, not needed but useful for future refence
     pkg: grunt.file.readJSON('package.json'),
     gruntfile: {
@@ -44,6 +45,17 @@ module.exports = function(grunt) {
         template : 'test/javascript/YuiJasmineRunner.tmpl'
       }
     },
+    less: {
+      compile: {
+        options: {
+          paths: [STYLESHEETS_PATH],
+          compress: true
+        },
+        files: {
+          "app/assets/stylesheets/style.css": "app/assets/stylesheets/style.less"
+        }
+      }
+    },
     watch: {
       gruntfile: {
         files: '<%= jshint.gruntfile.src %>',
@@ -60,6 +72,10 @@ module.exports = function(grunt) {
           forceWatchMethod: 'old',
           interrupt: true
         }
+      },
+      stylesheets: {
+          files: STYLESHEETS_PATH + "/**/*.less",
+          tasks: ['less']
       }
     }
   });
@@ -70,6 +86,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
+  grunt.loadNpmTasks('grunt-contrib-less');
 
 
     // Default task.
