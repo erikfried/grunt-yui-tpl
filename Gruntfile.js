@@ -10,6 +10,7 @@ module.exports = function(grunt) {
     gruntfile: {
       src: 'Gruntfile.js'
     },
+    //JSHINT CONFIG
     jshint: {
       options: {
         curly: true,
@@ -37,6 +38,7 @@ module.exports = function(grunt) {
         src: JS_SOURCES
       }
     },
+    //CONFIG FOR JASMINE TESTS
     jasmine : {
       src : JS_SOURCES,
       options : {
@@ -45,6 +47,7 @@ module.exports = function(grunt) {
         template : 'test/javascript/YuiJasmineRunner.tmpl'
       }
     },
+    //CONFIG FOR LESS STYLESHEETS COMPILATION
     less: {
       compile: {
         options: {
@@ -56,6 +59,7 @@ module.exports = function(grunt) {
         }
       }
     },
+    //WATCH CONFIG.
     watch: {
       gruntfile: {
         files: '<%= jshint.gruntfile.src %>',
@@ -90,6 +94,6 @@ module.exports = function(grunt) {
 
 
     // Default task.
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('default', ['jshint','jasmine']);
 
 };
