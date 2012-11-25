@@ -55,7 +55,7 @@ module.exports = function(grunt) {
       },
       sources: {
         files: '<%= jshint.sources.src %>',
-        tasks: ['jshint:sources'],
+        tasks: ['jshint:sources', 'jasmine'],
         options: {
           forceWatchMethod: 'old',
           interrupt: true
