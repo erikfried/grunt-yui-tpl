@@ -79,7 +79,11 @@ module.exports = function(grunt) {
       },
       stylesheets: {
           files: STYLESHEETS_PATH + "/**/*.less",
-          tasks: ['less']
+          tasks: ['less'],
+          options: {
+              forceWatchMethod: 'old',
+              interrupt: true
+          }
       }
     }
   });
