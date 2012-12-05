@@ -3,20 +3,28 @@
 <html>
 <head>
     <title>Jasmine Spec Runner</title>
-
     <% css.forEach(function(style){ %>
     <link rel="stylesheet" type="text/css" href="<%= style %>">
     <% }) %>
 
     <% with (scripts) { %>
-    <% [].concat(jasmine, vendor, helpers, src, specs, reporters).forEach(function(script){ %>
+    <% [].concat(jasmine, vendor, helpers, reporters).forEach(function(script){ %>
     <script type="text/javascript" src="<%= script %>"></script>
     <% }) %>
     <% }; %>
 
     <script>
-        YUI().use('*', function (Y){
+        if (!YUI_config) {
+            //YUI_config must be defined unless tests have no dependencies
+            console.warn("YUI_config is " +YUI_config);
+        }
+        YUI().use(
+        <% scripts.specs.forEach(function(script, i){ %>
+            '<%=script.replace(/^.*\//, "").replace(/\.js$/, "")%>' <% if(i !== scripts.length - 1) {%>,<%}%>
+            <% }) %>
+        function (Y){
             'use strict';
+
 
             var jasmineEnv = jasmine.getEnv();
 

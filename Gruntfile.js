@@ -2,8 +2,8 @@
 module.exports = function(grunt) {
 
   var JS_SOURCES = 'app/assets/javascript/src/**/*.js';
+  var JS_SPECS = 'test/javascript/specs/**/*spec.js';
   var STYLESHEETS_PATH = "app/assets/stylesheets";
-
     grunt.initConfig({
     // Metadata, not needed but useful for future refence
     pkg: grunt.file.readJSON('package.json'),
@@ -40,11 +40,14 @@ module.exports = function(grunt) {
     },
     //CONFIG FOR JASMINE TESTS
     jasmine : {
-      src : JS_SOURCES,
-      options : {
-        vendor   : 'app/assets/javascript/vendor/**/*.js',
-        specs    : 'test/javascript/specs/**/*spec.js',
-        template : 'test/javascript/YuiJasmineRunner.tmpl'
+      sources: {
+          src : JS_SOURCES,
+          options : {
+            vendor   : 'app/assets/javascript/vendor/**/*.js',
+            specs    : JS_SPECS,
+            helpers  : 'test/javascript/helpers/**/*.js',
+            template : 'test/javascript/YuiJasmineRunner.tmpl'
+          }
       }
     },
     //CONFIG FOR LESS STYLESHEETS COMPILATION
@@ -77,6 +80,14 @@ module.exports = function(grunt) {
           interrupt: true
         }
       },
+      specs: {
+        files: JS_SPECS,
+        tasks: ['jshint:sources', 'jasmine'],
+        options: {
+          forceWatchMethod: 'old',
+          interrupt: true
+        }
+      },
       stylesheets: {
           files: STYLESHEETS_PATH + "/**/*.less",
           tasks: ['less'],
@@ -95,6 +106,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-less');
+
+  grunt.loadTasks('../grunt-plugin-test/tasks');
 
 
     // Default task.
