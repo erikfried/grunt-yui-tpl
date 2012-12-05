@@ -107,7 +107,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-less');
 
-  grunt.loadTasks('../grunt-plugin-test/tasks');
+  //Test with adding a local reference to a plugin
+  //grunt.loadTasks('../grunt-plugin-test/tasks');
 
 
     // Default task.
